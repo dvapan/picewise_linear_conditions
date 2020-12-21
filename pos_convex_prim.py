@@ -20,13 +20,11 @@ dim = len(x)
 
 u = s.addVariable('u', dim)
 
+A = np.vstack([x,np.ones(dim)])
 
-A = np.matrix([
-    [-4, 0, 1, 2, 3 ,4],
-    [ 1, 1, 1, 1, 1, 1]
-])
+A = np.matrix(A)
 
-b = CyLPArray([x0,1])
+b = CyLPArray([x0, 1])
 
 s += A*u == b
 
