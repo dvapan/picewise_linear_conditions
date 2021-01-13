@@ -22,7 +22,7 @@ y_neg = np.piecewise(x, [x < 0,x >= 0], [lambda x:abs(x)*x, 0])
 print(x)
 print(y_pos)
 print(y_neg)
-x0 = -2
+x0 = 2
 
 rhs_p = np.array([x0, 1],dtype=np.double)
 
@@ -59,7 +59,7 @@ u_neg = s_neg.addVariable('u', dim_p)
 l_neg = s_neg.addVariable('l', dim_d)
 
 s_pos += A_p_pos*u_pos + A_d1*l_pos == b_p
-s_pos += A_p_neg*u_neg + A_d1*l_neg == b_p
+s_neg += A_p_neg*u_neg + A_d1*l_neg == b_p
 
 for i in range(dim_p):
     s_pos += u_pos[i] >= 0
@@ -86,4 +86,13 @@ cond_neg = s_neg.primalVariableSolution['u']
 x1_neg = np.dot(cond_neg, x)
 y1_neg = np.dot(cond_neg, y_neg)
 
-print(x1_pos, x1_neg, y1_pos, y1_neg)
+# print(x1_pos, x1_neg, y1_pos, y1_neg)
+
+if x1_pos == x1_neg:
+    x1 = x1_pos
+else:
+    x1 = x1_pos, x1_neg
+
+y1 = y1_neg + y1_pos
+
+print(x1,y1)
