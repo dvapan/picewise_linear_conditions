@@ -10,11 +10,11 @@ from cylp.py.modeling.CyLPModel import CyLPArray
 
 import numpy as np
 
-x = np.array([-4., 0., 1.  , 2., 3., 4.])
-y = np.array([ 0., 0., 0.5, 2., 4., 7.])
+x = np.arange(-4,5,1,dtype=np.double)
+y = np.piecewise(x, [x < 0,x >= 0], [0, lambda x:abs(x)*x])
 
 x01 = 2
-x02 = 4
+x02 = x01
 
 rhs_p = np.array([x01, 1])
 
@@ -64,3 +64,8 @@ print(s.dualVariableSolution)
 
 print(s.dualConstraintSolution)
 print(s.primalConstraintSolution)
+
+cond = s.primalVariableSolution['u']
+x1 = np.dot(cond, x)
+y1 = np.dot(cond, y)
+print(x1, y1)
