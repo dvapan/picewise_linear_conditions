@@ -16,8 +16,8 @@ import numpy as np
 
 # nonconvex function y = |x|x
 x = np.arange(-4,5,1,dtype=np.double)
-y_pos = np.piecewise(x, [x < 0,x >= 0], [0, lambda x:abs(x)*x])
-y_neg = np.piecewise(x, [x < 0,x >= 0], [lambda x:abs(x)*x, 0])
+y_pos = np.piecewise(x, [x < 0, x >= 0], [0, lambda x: abs(x)*x])
+y_neg = np.piecewise(x, [x < 0, x >= 0], [lambda x: abs(x)*x, 0])
 
 print(x)
 print(y_pos)
